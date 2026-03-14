@@ -129,31 +129,29 @@ void Solver::writeSolution(const char* filename) const {
 void Solver::writeSolutionWithExact(const char* filename) const {
     std::ofstream file(filename);
     file << std::scientific << std::setprecision(6);
-    file << "Number of cells = " << grid.getNx() << "\n";
-    file << "CFL = " << cfl << "\n";
-    file << "a = " << a << "\n";
-    file << "\n";
-    file << "L1 error = " << L1_error << "\n";
-    file << "Root mean square error = " << RMSE_error << "\n";
-    file << "\n";
-    file << "Wall time = " << elapsed << " seconds" "\n";
+
+    // metadata as comments
+    file << "# Number of cells = " << grid.getNx() << "\n";
+    file << "# CFL = " << cfl << "\n";
+    file << "# a = " << a << "\n";
+    file << "# L1 error = " << L1_error << "\n";
+    file << "# Root mean square error = " << RMSE_error << "\n";
+    file << "# Wall time = " << elapsed << " seconds" "\n";
     file << "\n";
 
-    file << std::setw(15) << "x"
-     << std::setw(20) << "Numerical_solution"
-     << std::setw(20) << "Exact_solution"
-     << std::setw(20) << "Error"
-     << "\n";
+    // Tecplot headers
+    file << "VARIABLES = \"x\" \"Numerical_solution\" \"Exact_solution\" \"Error\"\n";
+    file << "ZONE I=" << grid.getNx() << ", F=POINT\n";
+
     for (int i = 0; i < grid.getNx(); ++i) {
         double x = grid.getX(i);
         double u_exact = exactSolution(x);
         double error = u[i] - u_exact;
 
-        file << std::setw(15) << x
-         << std::setw(20) << u[i]
-         << std::setw(20) << u_exact
-         << std::setw(20) << error
-         << "\n";
+        file << x << " "
+             << u[i] << " "
+             << u_exact << " "
+             << error << "\n";
     }
 
     file.close();
