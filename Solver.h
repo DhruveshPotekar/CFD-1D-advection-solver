@@ -10,7 +10,10 @@ public:
 
     void initializeGaussian(double center, double width);
     void run();
+
     void writeSolution(const char* filename) const;
+    void writeSolutionWithExact(const char* filename) const;
+    double computeL2Error() const;
 
 private:
     Grid grid;
@@ -22,7 +25,12 @@ private:
     double final_time;
     double time;
 
+    double initial_center;
+    double initial_width;
+
     double computeTimeStep() const;
+    double exactSolution(double x) const;
+    double wrapToDomain(double x) const;
 };
 
 #endif

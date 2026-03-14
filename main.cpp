@@ -12,7 +12,7 @@ int main() {
 
     solver.initializeGaussian(0.3, 0.08);
     solver.run();
-    solver.writeSolution("solution.dat");
+    solver.writeSolutionWithExact("solution.dat");
 
     return 0;
 }
