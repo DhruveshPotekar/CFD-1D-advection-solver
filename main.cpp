@@ -4,7 +4,7 @@
 
 int main() {
 
-    int nx = 100;
+    int nx = 50;
     double x_start = 0.0;
     double x_end = 1.0;
     double a = 1.0;
@@ -27,7 +27,7 @@ int main() {
 
     std::cout << "Wall time = " << elapsed.count() << " seconds\n";
 
-    solver.writeSolutionWithExact("solution.dat");
+    solver.writeSolutionWithExact("solution_x50.dat");
 
     return 0;
 }

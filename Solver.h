@@ -13,7 +13,8 @@ public:
 
     void writeSolution(const char* filename) const;
     void writeSolutionWithExact(const char* filename) const;
-    double computeL2Error() const;
+    double computeL1Error() const;
+    double computeRMSE() const;
 
 private:
     Grid grid;
@@ -24,6 +25,10 @@ private:
     double cfl;
     double final_time;
     double time;
+    double elapsed;
+
+    double L1_error;
+    double RMSE_error;
 
     double initial_center;
     double initial_width;
